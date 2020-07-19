@@ -9,6 +9,7 @@ import { writeClientModels } from './writeClientModels';
 import { writeClientSchemas } from './writeClientSchemas';
 import { writeClientServices } from './writeClientServices';
 import { writeClientSettings } from './writeClientSettings';
+import { writeClientServicesIndex } from './writeClientServicesIndex';
 
 async function copySupportFile(filePath: string, outputPath: string): Promise<void> {
     await copyFile(path.resolve(__dirname, `../src/templates/${filePath}`), path.resolve(outputPath, filePath));
@@ -65,6 +66,7 @@ export async function writeClient(
         await mkdir(outputPathServices);
         await writeClientSettings(client, templates, outputPathCore, httpClient);
         await writeClientServices(client.services, templates, outputPathServices, useOptions);
+        await writeClientServicesIndex(client.services, templates, outputPathServices)
     }
 
     if (exportSchemas) {

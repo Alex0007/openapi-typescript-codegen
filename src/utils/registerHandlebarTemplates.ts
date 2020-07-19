@@ -4,6 +4,7 @@ import $OpenAPI from '../templates/core/OpenAPI.hbs';
 import $exportModel from '../templates/exportModel.hbs';
 import $exportSchema from '../templates/exportSchema.hbs';
 import $exportService from '../templates/exportService.hbs';
+import $exportServicesIndex from '../templates/exportServicesIndex.hbs';
 import $index from '../templates/index.hbs';
 import $exportEnum from '../templates/partials/exportEnum.hbs';
 import $exportInterface from '../templates/partials/exportInterface.hbs';
@@ -34,6 +35,7 @@ export interface Templates {
     model: Handlebars.TemplateDelegate;
     schema: Handlebars.TemplateDelegate;
     service: Handlebars.TemplateDelegate;
+    servicesIndex: Handlebars.TemplateDelegate;
     settings: Handlebars.TemplateDelegate;
 }
 
@@ -49,6 +51,7 @@ export function registerHandlebarTemplates(): Templates {
         model: Handlebars.template($exportModel),
         schema: Handlebars.template($exportSchema),
         service: Handlebars.template($exportService),
+        servicesIndex: Handlebars.template($exportServicesIndex),
         settings: Handlebars.template($OpenAPI),
     };
 
