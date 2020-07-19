@@ -10,7 +10,7 @@ program
     .version(pkg.version)
     .option('-i, --input <value>', 'Path to swagger specification', './spec.json')
     .option('-o, --output <value>', 'Output directory', './generated')
-    .option('-c, --client <value>', 'HTTP client to generate [fetch, xhr]', 'fetch')
+    .option('-c, --client <value>', 'HTTP client to generate [fetch, xhr, node-fetch]', 'fetch')
     .option('--useOptions', 'Use options vs arguments style functions')
     .option('--useUnionTypes', 'Use inclusive union types')
     .option('--exportCore <value>', 'Generate core', true)

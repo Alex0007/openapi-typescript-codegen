@@ -9,7 +9,10 @@ import { OpenAPI } from './OpenAPI';
 import { RequestOptions } from './RequestOptions';
 import { requestUsingFetch } from './requestUsingFetch';
 import { requestUsingXHR } from './requestUsingXHR';
+import { requestUsingNodeFetch } from './requestUsingNodeFetch';
 import { Result } from './Result';
+
+const H = typeof Headers !== 'undefined' ? Headers : require('node-fetch').Headers
 
 /**
  * Create the request.
@@ -23,7 +26,7 @@ export async function request(options: Readonly<RequestOptions>): Promise<Result
     let url = `${OpenAPI.BASE}${path}`;
 
     // Create request headers
-    const headers = new Headers({
+    const headers = new H({
         ...options.headers,
         Accept: 'application/json',
     });
@@ -73,6 +76,8 @@ export async function request(options: Readonly<RequestOptions>): Promise<Result
         switch (OpenAPI.CLIENT) {
             case 'xhr':
                 return await requestUsingXHR(url, request, options.responseHeader);
+            case 'node-fetch':
+                return await requestUsingNodeFetch(url, request, options.responseHeader)
             default:
                 return await requestUsingFetch(url, request, options.responseHeader);
         }

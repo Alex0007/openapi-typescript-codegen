@@ -56,6 +56,7 @@ export async function writeClient(
         await copySupportFile('core/request.ts', outputPath);
         await copySupportFile('core/RequestOptions.ts', outputPath);
         await copySupportFile('core/requestUsingFetch.ts', outputPath);
+        await copySupportFile('core/requestUsingNodeFetch.ts', outputPath);
         await copySupportFile('core/requestUsingXHR.ts', outputPath);
         await copySupportFile('core/Result.ts', outputPath);
     }
