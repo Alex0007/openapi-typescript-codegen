@@ -53,7 +53,6 @@ export async function generate({
     exportSchemas = false,
     write = true,
 }: Options): Promise<void> {
-    console.log('generate', httpClient);
     // Load the specification, read the OpenAPI version and load the
     // handlebar templates for the given language
     const openApi = isString(input) ? await getOpenApiSpec(input) : input;
