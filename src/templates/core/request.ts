@@ -61,7 +61,7 @@ export async function request(options: Readonly<RequestOptions>): Promise<Result
 
         // If this is blob data, then pass it directly to the body and set content type.
         // Otherwise we just convert request data to JSON string (needed for fetch api)
-        if (typeof Blob !== undefined && options.body instanceof Blob) {
+        if (typeof Blob !== 'undefined' && options.body instanceof Blob) {
             request.body = options.body;
             if (options.body.type) {
                 headers.append('Content-Type', options.body.type);
