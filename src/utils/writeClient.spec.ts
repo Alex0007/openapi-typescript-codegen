@@ -16,6 +16,7 @@ describe('writeClient', () => {
         };
 
         const templates: Templates = {
+            servicesIndex: () => 'dummy',
             index: () => 'dummy',
             model: () => 'dummy',
             schema: () => 'dummy',
@@ -23,7 +24,7 @@ describe('writeClient', () => {
             settings: () => 'dummy',
         };
 
-        await writeClient(client, templates, '/', HttpClient.FETCH, false, true, true, true, true);
+        await writeClient(client, templates, '/', HttpClient.FETCH, {}, false, true, true, true, true);
 
         expect(rmdir).toBeCalled();
         expect(mkdir).toBeCalled();

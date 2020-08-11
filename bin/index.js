@@ -11,6 +11,7 @@ program
     .option('-i, --input <value>', 'Path to swagger specification', './spec.json')
     .option('-o, --output <value>', 'Output directory', './generated')
     .option('-c, --client <value>', 'HTTP client to generate [fetch, xhr, node-fetch]', 'fetch')
+    .option('--globalHeaders <value>', 'Common HTTP headers')
     .option('--useOptions', 'Use options vs arguments style functions')
     .option('--useUnionTypes', 'Use inclusive union types')
     .option('--exportCore <value>', 'Generate core', true)
@@ -26,6 +27,7 @@ if (OpenAPI) {
         input: program.input,
         output: program.output,
         httpClient: program.client,
+        globalHeaders: program.globalHeaders ? JSON.parse(program.globalHeaders) : {},
         useOptions: program.useOptions,
         useUnionTypes: program.useUnionTypes,
         exportCore: JSON.parse(program.exportCore) === true,

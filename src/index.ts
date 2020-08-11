@@ -10,13 +10,14 @@ import { writeClient } from './utils/writeClient';
 export enum HttpClient {
     FETCH = 'fetch',
     XHR = 'xhr',
-    NODE_FETCH = 'node-fetch'
+    NODE_FETCH = 'node-fetch',
 }
 
 export interface Options {
     input: string | Record<string, any>;
     output: string;
     httpClient?: HttpClient;
+    globalHeaders?: { [key: string]: any };
     useOptions?: boolean;
     useUnionTypes?: boolean;
     exportCore?: boolean;
@@ -33,6 +34,7 @@ export interface Options {
  * @param input The relative location of the OpenAPI spec.
  * @param output The relative location of the output directory.
  * @param httpClient The selected httpClient (fetch or XHR).
+ * @param globalHeaders Common HTTP headers
  * @param useOptions Use options or arguments functions.
  * @param useUnionTypes Use inclusive union types.
  * @param exportCore: Generate core client classes.
@@ -45,6 +47,7 @@ export async function generate({
     input,
     output,
     httpClient = HttpClient.FETCH,
+    globalHeaders = {},
     useOptions = false,
     useUnionTypes = false,
     exportCore = true,
@@ -64,7 +67,7 @@ export async function generate({
             const client = parseV2(openApi);
             const clientFinal = postProcessClient(client, useUnionTypes);
             if (write) {
-                await writeClient(clientFinal, templates, output, httpClient, useOptions, exportCore, exportServices, exportModels, exportSchemas);
+                await writeClient(clientFinal, templates, output, httpClient, globalHeaders, useOptions, exportCore, exportServices, exportModels, exportSchemas);
             }
             break;
         }
@@ -73,7 +76,7 @@ export async function generate({
             const client = parseV3(openApi);
             const clientFinal = postProcessClient(client, useUnionTypes);
             if (write) {
-                await writeClient(clientFinal, templates, output, httpClient, useOptions, exportCore, exportServices, exportModels, exportSchemas);
+                await writeClient(clientFinal, templates, output, httpClient, globalHeaders, useOptions, exportCore, exportServices, exportModels, exportSchemas);
             }
             break;
         }

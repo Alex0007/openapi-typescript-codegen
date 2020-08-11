@@ -32,6 +32,7 @@ export async function writeClient(
     templates: Templates,
     output: string,
     httpClient: HttpClient,
+    globalHeaders: { [key: string]: any },
     useOptions: boolean,
     exportCore: boolean,
     exportServices: boolean,
@@ -64,9 +65,9 @@ export async function writeClient(
 
     if (exportServices) {
         await mkdir(outputPathServices);
-        await writeClientSettings(client, templates, outputPathCore, httpClient);
+        await writeClientSettings(client, templates, outputPathCore, httpClient, globalHeaders);
         await writeClientServices(client.services, templates, outputPathServices, useOptions);
-        await writeClientServicesIndex(client.services, templates, outputPathServices)
+        await writeClientServicesIndex(client.services, templates, outputPathServices);
     }
 
     if (exportSchemas) {

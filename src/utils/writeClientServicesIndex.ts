@@ -7,11 +7,8 @@ import { Templates } from './registerHandlebarTemplates';
 
 export async function writeClientServicesIndex(services: Service[], templates: Templates, outputPath: string): Promise<void> {
     const templateResult = templates.servicesIndex({
-        services
+        services,
     });
-    
-    await writeFile(
-        path.resolve(outputPath, 'index.ts'),
-        format(templateResult)
-    );
+
+    await writeFile(path.resolve(outputPath, 'index.ts'), format(templateResult));
 }

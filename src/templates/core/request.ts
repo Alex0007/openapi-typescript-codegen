@@ -28,6 +28,7 @@ export async function request(options: Readonly<RequestOptions>): Promise<Result
     // Create request headers
     const headers = new H({
         ...options.headers,
+        ...OpenAPI.WITH_HEADERS,
         Accept: 'application/json',
     });
 

@@ -16,6 +16,7 @@ describe('writeClientSettings', () => {
         };
 
         const templates: Templates = {
+            servicesIndex: () => 'dummy',
             index: () => 'dummy',
             model: () => 'dummy',
             schema: () => 'dummy',
@@ -23,7 +24,7 @@ describe('writeClientSettings', () => {
             settings: () => 'dummy',
         };
 
-        await writeClientSettings(client, templates, '/', HttpClient.FETCH);
+        await writeClientSettings(client, templates, '/', HttpClient.FETCH, {});
 
         expect(writeFile).toBeCalledWith('/OpenAPI.ts', 'dummy');
     });
